@@ -23,12 +23,14 @@ namespace LenfLock {
             string ans = math.Item2;
             button1.Click += (x, e) => {
                 if(textBox1.Text.Trim(new char[] { '\n', '\r', ' ' }) == ans) {
-                    Program.Close();
+                    Program.hide();
+                    //Program.Close();
                 }
             };
             textBox1.KeyDown += (x, e) => {
                 if(e.KeyCode == Keys.Enter && textBox1.Text.Trim(new char[] { '\n', '\r', ' ' }) == ans) {
-                    Program.Close();
+                    Program.hide();
+                    //Program.Close();
                 }
             };
         }

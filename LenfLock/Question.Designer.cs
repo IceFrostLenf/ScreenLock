@@ -24,10 +24,10 @@
         /// </summary>
         private void InitializeComponent() {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,35 +43,6 @@
             this.panel1.Size = new System.Drawing.Size(467, 304);
             this.panel1.TabIndex = 1;
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("PMingLiU", 20F);
-            this.button1.Location = new System.Drawing.Point(242, 249);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(215, 44);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Submit";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Font = new System.Drawing.Font("PMingLiU", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox1.Location = new System.Drawing.Point(242, 14);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(215, 232);
-            this.textBox1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.Font = new System.Drawing.Font("PMingLiU", 15F);
-            this.label1.Location = new System.Drawing.Point(13, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(223, 232);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Question：";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.Control;
@@ -84,6 +55,36 @@
             this.textBox2.PasswordChar = '*';
             this.textBox2.Size = new System.Drawing.Size(114, 44);
             this.textBox2.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("PMingLiU", 20F);
+            this.button1.Location = new System.Drawing.Point(242, 249);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(215, 44);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Submit";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("PMingLiU", 18.25F);
+            this.textBox1.Location = new System.Drawing.Point(242, 14);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(215, 232);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("PMingLiU", 15F);
+            this.label1.Location = new System.Drawing.Point(13, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(223, 232);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Question：";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Question
             // 

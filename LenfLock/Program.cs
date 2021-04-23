@@ -25,11 +25,13 @@ namespace LenfLock {
 
             // init 
             mainInterface = new MainInterface(Closing, out panel, out tableLayoutPanel, out notifyIcon);
+            //mainInterface.show();
+            hide();
 
-            TimeingSystem timeingSystem = new TimeingSystem(30, show);
+
+            //TimeingSystem timeingSystem = new TimeingSystem(30, show);
 
             // NotifyIcon
-            notifyIcon.Visible = true;
             notifyIcon.ContextMenu = new ContextMenu();
             notifyIcon.ContextMenu.MenuItems.Add("AAA", (x, e) => { });
 
@@ -53,7 +55,12 @@ namespace LenfLock {
             form.Show();
         }
         public static Time.ElapsedEventHandler show = (x, e) => {
-
+            mainInterface.Show();
+            notifyIcon.Visible = false;
+        };
+        public static Action hide = () => {
+            mainInterface.Hide();
+            notifyIcon.Visible = true;
         };
         public static void Close() {
             mainInterface.FormClosing -= Closing;
