@@ -47,11 +47,18 @@ namespace LenfLock {
 
         #region Math
         public class QMath {
-            public int minNum = 3;
-            public int maxNum = 9;
-            public int plusCount = 1;
-            public int minusCount = 0;
-            public int mutlyCount = 0;
+            public int minNum { get; set; }
+            public int maxNum { get; set; }
+            public int plusCount { get; set; }
+            public int minusCount { get; set; }
+            public int mutlyCount { get; set; }
+            public QMath() {
+                minNum = 3;
+                maxNum = 9;
+                plusCount = 1;
+                minusCount = 0;
+                mutlyCount = 0;
+            }
             public Tuple<string, string> GenerateQuestion() {
                 Random r = new Random();
                 short count = (short)(plusCount + minusCount + mutlyCount + 1);

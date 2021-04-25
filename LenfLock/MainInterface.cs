@@ -13,6 +13,7 @@ namespace LenfLock {
         public MainInterface(FormClosingEventHandler Closing, out Panel panel, out TableLayoutPanel tableLayoutPanel, out NotifyIcon notifyIcon) {
             InitializeComponent();
             TopMost = true;
+            WindowState = FormWindowState.Maximized;
             FormClosing += Closing;
             panel = panel1;
             tableLayoutPanel = tableLayoutPanel1;

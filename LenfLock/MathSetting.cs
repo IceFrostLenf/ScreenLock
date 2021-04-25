@@ -13,26 +13,24 @@ namespace LenfLock {
         public MathSetting() {
             InitializeComponent();
             List<TextBox> textBoxes = new List<TextBox>() { textBox1, textBox2, textBox3, textBox4, textBox5 };
-            textBoxes[0].Text = QuestionData.instance.Math.minNum.ToString();
-            textBoxes[1].Text = QuestionData.instance.Math.maxNum.ToString();
-            textBoxes[2].Text = QuestionData.instance.Math.plusCount.ToString();
-            textBoxes[3].Text = QuestionData.instance.Math.minusCount.ToString();
-            textBoxes[4].Text = QuestionData.instance.Math.mutlyCount.ToString();
+
+            List<string> TextdataSource = new List<string>() { "minNum", "maxNum", "plusCount", "minusCount", "mutlyCount" };
+
+            ErrorProvider error = new ErrorProvider();
+
+            BindingSource math = new BindingSource(QuestionData.instance.Math, "");
+
+            for(int i = 0; i < 5; i++) {
+                textBoxes[i].Validating += (x, e) => {
+                    error.SetError((x as TextBox), int.TryParse((x as TextBox).Text, out _) ? "" : "The value need to be a number");
+                };
+                textBoxes[i].DataBindings.Add("Text", math, TextdataSource[i], true);
+            }
             button1.Click += (x, e) => {
-                int num;
-                if(!textBoxes.All(x => int.TryParse(x.Text, out num))) {
-                    MessageBox.Show("請確認輸入全為數字");
+                if(!textBoxes.All(x=>error.GetError(x) == "")) {
+                    MessageBox.Show("請確認輸入是否正確");
                     return;
                 }
-
-                List<int> nums = textBoxes.Select(x => int.Parse(x.Text)).ToList();
-                QuestionData.instance.Math = new QuestionData.QMath() {
-                    minNum = nums[0],
-                    maxNum = nums[1],
-                    plusCount = nums[2],
-                    minusCount = nums[3],
-                    mutlyCount = nums[4]
-                };
                 try {
                     QuestionData.Save();
                     MessageBox.Show("儲存成功");

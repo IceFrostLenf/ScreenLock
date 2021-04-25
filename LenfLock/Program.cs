@@ -11,8 +11,8 @@ namespace LenfLock {
         static Panel panel;
         static TableLayoutPanel tableLayoutPanel;
         static MainInterface mainInterface;
+        static List<Form> AllScreens;
         static NotifyIcon notifyIcon;
-        static ImageList imageList;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -20,31 +20,27 @@ namespace LenfLock {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+            // Load Storage
             QuestionData.Load();
-
             // init 
             mainInterface = new MainInterface(Closing, out panel, out tableLayoutPanel, out notifyIcon);
-            //mainInterface.show();
-            hide();
-
-
-            //TimeingSystem timeingSystem = new TimeingSystem(30, show);
-
             // NotifyIcon
             notifyIcon.ContextMenu = new ContextMenu();
-            notifyIcon.ContextMenu.MenuItems.Add("AAA", (x, e) => { });
-
+            notifyIcon.Visible = false;
+            notifyIcon.ContextMenu.MenuItems.Add("Exit", (x, e) => { mainInterface.FormClosing -= Closing; mainInterface.Close(); });
+            // Load UI
             Program.add(new Question());
-
-
+            // All Screen Lock
+            AllScreens = new List<Form>(Screen.AllScreens.Length);
+            for(int i = 0; i < AllScreens.Count; i++) {
+                AllScreens[i] = new Form();
+                AllScreens[i].FormBorderStyle = FormBorderStyle.None;
+                AllScreens[i].Bounds = Screen.AllScreens[i].Bounds;
+                AllScreens[i].WindowState = FormWindowState.Maximized;
+            }
+            // Run
             Application.Run(mainInterface);
 
-            //Form form = new Form();
-            //form.FormBorderStyle = FormBorderStyle.None;
-            //form.Bounds = Screen.AllScreens[0].Bounds;
-            //form.WindowState = FormWindowState.Maximized;
-            //Application.Run(form);
         }
         public static void add(Form form) {
             form.TopLevel = false;
@@ -56,15 +52,19 @@ namespace LenfLock {
         }
         public static Time.ElapsedEventHandler show = (x, e) => {
             mainInterface.Show();
+            AllScreens.ForEach(x => x.Visible = true);
             notifyIcon.Visible = false;
         };
-        public static Action hide = () => {
+        public static void hide() {
             mainInterface.Hide();
+            AllScreens.ForEach(x => x.Visible = false);
             notifyIcon.Visible = true;
-        };
-        public static void Close() {
-            mainInterface.FormClosing -= Closing;
-            mainInterface.Close();
+
+            Time.Timer timer = new Time.Timer(QuestionData.instance.System.TimeForRecall * 60000);
+            timer.SynchronizingObject = mainInterface;
+            timer.AutoReset = false;
+            timer.Elapsed += show;
+            timer.Start();
         }
         public static FormClosingEventHandler Closing = (x, e) => e.Cancel = true;
     }
