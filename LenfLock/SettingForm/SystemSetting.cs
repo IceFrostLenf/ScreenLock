@@ -9,27 +9,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LenfLock {
-    public partial class PersonalSetting : Form {
-        public PersonalSetting() {
+    public partial class SystemSetting : Form {
+        public SystemSetting() {
             InitializeComponent();
+            textBox1.Text = QuestionData.instance.System.TimeForRecall.ToString();
             button1.Click += (x, e) => {
-                if(textBox1.Text != QuestionData.instance.Pinstance.password) {
-                    MessageBox.Show("舊密碼輸入錯誤");
-                    return;
-                }
-                if(textBox2.Text != textBox3.Text) {
-                    MessageBox.Show("新密碼不相符");
+                int time;
+                if(!int.TryParse(textBox1.Text, out time)) {
+                    MessageBox.Show("請輸入數字");
                     return;
                 }
 
-                QuestionData.instance.Pinstance.password = textBox2.Text;
+                QuestionData.instance.System.TimeForRecall = time;
                 try {
                     QuestionData.Save();
                     MessageBox.Show("儲存成功");
                 } catch(Exception err) {
                     MessageBox.Show(err.Message);
                 }
-                Program.add(new Question());
+                MainInterface.add(new Setting());
             };
         }
     }

@@ -13,7 +13,7 @@ namespace LenfLock {
         public Setting() {
             InitializeComponent();
             button1.Click += (x, e) => {
-                Program.add(new Question());
+                MainInterface.add(new Question());
             };
         }
 

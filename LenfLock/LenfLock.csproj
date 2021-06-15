@@ -67,28 +67,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainInterface.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainInterface.Designer.cs">
       <DependentUpon>MainInterface.cs</DependentUpon>
     </Compile>
-    <Compile Include="MathSetting.cs">
+    <Compile Include="SettingForm\MathSetting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MathSetting.Designer.cs">
+    <Compile Include="SettingForm\MathSetting.Designer.cs">
       <DependentUpon>MathSetting.cs</DependentUpon>
     </Compile>
-    <Compile Include="PersonalSetting.cs">
+    <Compile Include="SettingForm\PersonalSetting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PersonalSetting.Designer.cs">
+    <Compile Include="SettingForm\PersonalSetting.Designer.cs">
       <DependentUpon>PersonalSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -100,28 +94,25 @@
       <DependentUpon>Question.cs</DependentUpon>
     </Compile>
     <Compile Include="QuestionData.cs" />
-    <Compile Include="Setting.cs">
+    <Compile Include="SettingForm\Setting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Setting.Designer.cs">
+    <Compile Include="SettingForm\Setting.Designer.cs">
       <DependentUpon>Setting.cs</DependentUpon>
     </Compile>
-    <Compile Include="SystemSetting.cs">
+    <Compile Include="SettingForm\SystemSetting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SystemSetting.Designer.cs">
+    <Compile Include="SettingForm\SystemSetting.Designer.cs">
       <DependentUpon>SystemSetting.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainInterface.resx">
       <DependentUpon>MainInterface.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MathSetting.resx">
+    <EmbeddedResource Include="SettingForm\MathSetting.resx">
       <DependentUpon>MathSetting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PersonalSetting.resx">
+    <EmbeddedResource Include="SettingForm\PersonalSetting.resx">
       <DependentUpon>PersonalSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -137,10 +128,10 @@
     <EmbeddedResource Include="Question.resx">
       <DependentUpon>Question.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Setting.resx">
+    <EmbeddedResource Include="SettingForm\Setting.resx">
       <DependentUpon>Setting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SystemSetting.resx">
+    <EmbeddedResource Include="SettingForm\SystemSetting.resx">
       <DependentUpon>SystemSetting.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

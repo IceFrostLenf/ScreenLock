@@ -15,7 +15,7 @@ namespace LenfLock {
 
             textBox2.TextChanged += (x, e) => {
                 if(textBox2.Text == QuestionData.instance.Pinstance.password)
-                    Program.add(new Setting());
+                    MainInterface.add(new Setting());
             };
 
             var math = QuestionData.instance.Math.GenerateQuestion();
@@ -24,13 +24,13 @@ namespace LenfLock {
             button1.Click += (x, e) => {
                 if(textBox1.Text.Trim(new char[] { '\n', '\r', ' ' }) == ans) {
                     textBox1.Text = "";
-                    Program.hide();
+                    MainInterface.instance.hide();
                 }
             };
             textBox1.KeyDown += (x, e) => {
                 if(e.KeyCode == Keys.Enter && textBox1.Text.Trim(new char[] { '\n', '\r', ' ' }) == ans) {
                     textBox1.Text = "";
-                    Program.hide();
+                    MainInterface.instance.hide();
                 }
             };
         }
