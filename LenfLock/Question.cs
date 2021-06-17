@@ -10,17 +10,17 @@ using System.Windows.Forms;
 
 namespace LenfLock {
     public partial class Question : Form {
+        string ans;
         public Question() {
             InitializeComponent();
 
             textBox2.TextChanged += (x, e) => {
                 if(textBox2.Text == QuestionData.instance.Pinstance.password)
-                    MainInterface.add(new Setting());
+                    MainInterface.instance.add(new Setting());
             };
 
-            var math = QuestionData.instance.Math.GenerateQuestion();
-            label1.Text = $"Question：\n{math.Item1}";
-            string ans = math.Item2;
+            start();
+
             button1.Click += (x, e) => {
                 if(textBox1.Text.Trim(new char[] { '\n', '\r', ' ' }) == ans) {
                     textBox1.Text = "";
@@ -33,6 +33,11 @@ namespace LenfLock {
                     MainInterface.instance.hide();
                 }
             };
+        }
+        public void start() {
+            var math = QuestionData.instance.Math.GenerateQuestion();
+            label1.Text = $"Question：\n{math.Item1}";
+            ans = math.Item2;
         }
     }
 }

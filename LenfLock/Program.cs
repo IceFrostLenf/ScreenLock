@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Time = System.Timers;
 using System.Threading;
+using System.Text;
 
 namespace LenfLock {
     static class Program {
@@ -15,10 +15,20 @@ namespace LenfLock {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // Load Storage
-            QuestionData.Load();
-            // Run
-            Application.Run(new MainInterface());
+            using(Mutex m = new Mutex(false, "ScreenLock")) {
+                if(!m.WaitOne(0, false)) {
+                    new LenfClient().Connect("127.0.0.1", 3141).Send("secondApp").DisConnect();
+                } else {
+
+                    // Load Storage
+                    QuestionData.Load();
+                    // lan Server
+                    new LenfServer().Start();
+                    // Run
+                    Application.Run(new MainInterface());
+                    m.ReleaseMutex();
+                }
+            }
         }
     }
 }

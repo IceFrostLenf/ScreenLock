@@ -27,7 +27,7 @@ namespace LenfLock {
                 } catch(Exception err) {
                     MessageBox.Show(err.Message);
                 }
-                MainInterface.add(new Setting());
+                MainInterface.instance.add(new Setting());
             };
         }
     }

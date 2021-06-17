@@ -67,6 +67,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LenfClient.cs" />
+    <Compile Include="LenfServer.cs" />
     <Compile Include="MainInterface.cs">
       <SubType>Form</SubType>
     </Compile>

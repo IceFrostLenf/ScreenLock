@@ -5,18 +5,23 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using Time = System.Timers;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LenfLock {
     public partial class MainInterface : Form {
+        public bool isShow;
 
         public static MainInterface instance;
         Panel panel;
         TableLayoutPanel tableLayoutPanel;
         NotifyIcon notifyIcon;
-        List<Form> AllScreens;
+        List<Form> allScreens;
+        Time.Timer lateShow;
+
+        Form currentForm;
 
         public MainInterface() {
             InitializeComponent();
@@ -26,11 +31,13 @@ namespace LenfLock {
         }
         private void init() {
             //property
+            isShow = true;
+
             instance = this;
             panel = panel1;
             tableLayoutPanel = tableLayoutPanel1;
             notifyIcon = notifyIcon1;
-            AllScreens = new List<Form>(Screen.AllScreens.Length);
+            allScreens = new List<Form>(Screen.AllScreens.Length);
 
             //init
             TopMost = true;
@@ -43,15 +50,22 @@ namespace LenfLock {
             notifyIcon1.ContextMenu.MenuItems.Add("Exit", (x, e) => { FormClosing -= Closing; Close(); });
 
             // All Screen Lock
-            for(int i = 0; i < AllScreens.Count; i++) {
-                AllScreens[i] = new Form();
-                AllScreens[i].FormBorderStyle = FormBorderStyle.None;
-                AllScreens[i].Bounds = Screen.AllScreens[i].Bounds;
-                AllScreens[i].WindowState = FormWindowState.Maximized;
+            for(int i = 0; i < allScreens.Count; i++) {
+                allScreens[i] = new Form();
+                allScreens[i].FormBorderStyle = FormBorderStyle.None;
+                allScreens[i].Bounds = Screen.AllScreens[i].Bounds;
+                allScreens[i].WindowState = FormWindowState.Maximized;
             }
 
+            // timer
+            lateShow = new Time.Timer(QuestionData.instance.System.TimeForRecall * 60000);
+            lateShow.SynchronizingObject = instance;
+            lateShow.AutoReset = false;
+            lateShow.Elapsed += (x, e) => show();
         }
-        public static void add(Form form) {
+        public void add(Form form) {
+            currentForm = form;
+
             form.TopLevel = false;
             instance.panel.Controls.Clear();
             instance.panel.Controls.Add(form);
@@ -59,18 +73,22 @@ namespace LenfLock {
             instance.tableLayoutPanel.RowStyles[1].Height = form.Size.Height;
             form.Show();
         }
+        public void show() {
+            (currentForm as Question).start();
+            lateShow.Stop();
 
-        private Action<Task> show = (x) => {
+            instance.isShow = true;
             instance.Show();
-            instance.AllScreens.ForEach(x => x.Visible = true);
+            instance.allScreens.ForEach(x => x.Visible = true);
             instance.notifyIcon.Visible = false;
-        };
+        }
         public void hide() {
+            instance.isShow = false;
             instance.Hide();
-            AllScreens.ForEach(x => x.Visible = false);
+            allScreens.ForEach(x => x.Visible = false);
             notifyIcon.Visible = true;
 
-            Task.Delay(QuestionData.instance.System.TimeForRecall * 60000).ContinueWith(show);
+            lateShow.Start();
         }
 
         FormClosingEventHandler Closing = (x, e) => e.Cancel = true;
